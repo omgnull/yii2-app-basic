@@ -42,9 +42,9 @@ install:
 
 before_script:
   - ps axu
-  - cd $TRAVIS_BUIL_DIR/tests
-  - $TRAVIS_BUIL_DIR/vendor/bin/codecept build
+  - cd $TRAVIS_BUILD_DIR/tests
+  - $TRAVIS_BUILD_DIR/vendor/bin/codecept build
 
 script:
-  - cd $TRAVIS_BUIL_DIR/tests
+  - cd $TRAVIS_BUILD_DIR/tests
   - $TRAVIS_BUIL_DIR/vendor/bin/codecept run
