@@ -48,4 +48,4 @@ before_script:
 
 script:
   - cd $TRAVIS_BUILD_DIR/tests
-  - $TRAVIS_BUILD_DIR/vendor/bin/codecept run -v
+  - $TRAVIS_BUILD_DIR/vendor/bin/codecept run -vvv
