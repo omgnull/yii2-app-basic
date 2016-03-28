@@ -35,6 +35,7 @@ install:
   - travis_retry composer self-update 1.0.0-beta1 && composer --version
   - travis_retry composer global require fxp/composer-asset-plugin:dev-master --no-plugins
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - composer self-update 1.0.0-beta2
   - composer config --global github-oauth.github.com 8e715ae4bc8a6fe4737f726897dbdef0868e2b90
   - travis_retry composer install --prefer-dist --no-interaction
   - composer show --self && composer global show -i && composer show -i
