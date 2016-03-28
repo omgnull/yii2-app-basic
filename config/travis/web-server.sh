@@ -30,5 +30,5 @@ cat "$NGINX_DIR/nginx.conf"
 cat "$NGINX_DIR/conf.d/condom-shop.test.conf"
 
 # run nginx
-nginx -c "$NGINX_DIR/nginx.conf"
+nginx -c "$NGINX_DIR/nginx.conf" -p $NGINX_DIR
 

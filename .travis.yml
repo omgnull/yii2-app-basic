@@ -30,7 +30,7 @@ install:
   # nginx + php-fpm
   - config/travis/web-server.sh
   # selenuim
-  - config/travis/selenuim.sh
+  - config/travis/selenium.sh
   # composer
   - travis_retry composer self-update 1.0.0-beta1 && composer --version
   - travis_retry composer global require fxp/composer-asset-plugin:dev-master --no-plugins
