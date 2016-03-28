@@ -1,27 +1,45 @@
 language: php
-
 php:
   - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-#  - hhvm
+addons:
+  apt:
+    - nginx
+    - realpath
+  hosts:
+    - condom-shop.test
+    - static.condom-shop.test
+    - new-condom-shop.test
+    - static.new-condom-shop.test
 
-# faster builds on new travis setup not using sudo
+# docker based build
 sudo: false
 
-# cache vendor dirs
+# cache dirs
 cache:
   directories:
     - $HOME/.composer/cache
+    - $HOME/.selenium
+
+before_install:
+  # xvfb
+  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1920x1080x16"
 
 install:
-  - travis_retry composer self-update && composer --version
-  - travis_retry composer global require "fxp/composer-asset-plugin:~1.1.1"
+  - export YII_ENV=test
+  - export DISPLAY=:99
+  # nginx + php-fpm
+  - config/web-server.sh
+  # selenuim
+  - config/selenuim.sh
+  # composer
+  - travis_retry composer self-update 1.0.0-beta1 && composer --version
+  - travis_retry composer global require fxp/composer-asset-plugin:dev-master --no-plugins
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - travis_retry composer install --dev --prefer-dist --no-interaction
-# codeception
-  - travis_retry composer global require "codeception/codeception=2.0.*" "codeception/specify=*" "codeception/verify=*"
+  - composer config --global github-oauth.github.com 8e715ae4bc8a6fe4737f726897dbdef0868e2b90
+  - travis_retry composer install --prefer-dist --no-interaction
+  - composer show --self && composer global show -i && composer show -i
+
+before_script:
 # setup application:
   - |
     sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" config/web.php
