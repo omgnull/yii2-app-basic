@@ -27,5 +27,5 @@ replace_vars "$NGINX_DIR/nginx.conf"
 replace_vars "$NGINX_DIR/conf.d/condom-shop.test.conf"
 
 # run nginx
-nginx -c "$NGINX_DIR/nginx/nginx.conf"
+nginx -c "$NGINX_DIR/nginx.conf"
 
