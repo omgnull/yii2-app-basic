@@ -18,7 +18,7 @@ modules:
 # it is useful if you want to login in your app in each test.
 #        - WebDriver
     config:
-        tests\codeception\common\_support\WebDriver:
+        WebDriver:
             url: 'http://condom-shop.test:8000'
             browser: 'firefox'
             clear_cookies: true
