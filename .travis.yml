@@ -39,11 +39,12 @@ install:
   - travis_retry composer install --prefer-dist --no-interaction
   - composer show --self && composer global show -i && composer show -i
   - sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" config/web.php
-  - cd tests && codecept build
 
 before_script:
   - ps axu && netstat -nltp
+  - cd $TRAVIS_BUIL_DIR/tests
+  - $TRAVIS_BUIL_DIR/vendor/bin/codecept build
 
 script:
   - cd $TRAVIS_BUIL_DIR/tests
-  - codecept run
+  - $TRAVIS_BUIL_DIR/vendor/bin/codecept run
