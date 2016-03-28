@@ -19,7 +19,7 @@ echo "short_open_tag = On" >> "$HOME/.phpenv/versions/$PHP_VERSION/etc/php.ini"
 
 # setup nginx
 mkdir -p ${NGINX_DIR}
-mv "$TRAVIS_BUILD_DIR/config/nginx" "$NGINX_DIR/nginx"
+mv "$TRAVIS_BUILD_DIR/config/travis/nginx" "$NGINX_DIR/nginx"
 replace_vars "$NGINX_DIR/nginx.conf"
 replace_vars "$NGINX_DIR/conf.d/condom-shop.test.conf"
 
