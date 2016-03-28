@@ -26,3 +26,9 @@ until $(curl --output /dev/null --silent --head --fail http://localhost:4444/wd/
     sleep 1
 done
 printf '\n'
+
+timeout 10s sh -c\
+  "while ! curl --silent http://localhost:4444/ > /dev/null; do
+    echo \"Waiting for Selenium to start...\" && sleep 0.1;
+  done"\
+ || exit 1
