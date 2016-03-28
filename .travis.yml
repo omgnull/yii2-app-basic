@@ -45,6 +45,7 @@ before_script:
   - ps axu
   - cd $TRAVIS_BUILD_DIR/tests
   - $TRAVIS_BUILD_DIR/vendor/bin/codecept build
+  - curl -XGET 'http://condom-shop.test'
 
 script:
   - cd $TRAVIS_BUILD_DIR/tests
