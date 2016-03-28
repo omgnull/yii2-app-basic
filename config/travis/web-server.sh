@@ -19,7 +19,9 @@ echo "short_open_tag = On" >> "$HOME/.phpenv/versions/$PHP_VERSION/etc/php.ini"
 
 # setup nginx
 mkdir -p ${NGINX_DIR}
+printf "$TRAVIS_BUILD_DIR/config/travis/nginx"
 ls -al "$TRAVIS_BUILD_DIR/config/travis/nginx"
+printf "$TRAVIS_BUILD_DIR/config/travis/nginx $NGINX_DIR"
 mv "$TRAVIS_BUILD_DIR/config/travis/nginx" $NGINX_DIR
 ls -al $NGINX_DIR
 replace_vars "$NGINX_DIR/nginx.conf"
