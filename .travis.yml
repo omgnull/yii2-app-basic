@@ -41,7 +41,7 @@ install:
   - sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" config/web.php
 
 before_script:
-  - ps axu && netstat -nltp
+  - ps axu
   - cd $TRAVIS_BUIL_DIR/tests
   - $TRAVIS_BUIL_DIR/vendor/bin/codecept build
 
