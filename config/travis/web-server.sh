@@ -20,10 +20,7 @@ echo "short_open_tag = On" >> "$HOME/.phpenv/versions/$PHP_VERSION/etc/php.ini"
 
 # setup nginx
 printf "Move Nginx setup from $TRAVIS_BUILD_DIR/config/travis/nginx to $NGINX_DIR\n"
-if [[ mv "$TRAVIS_BUILD_DIR/config/travis/nginx" $NGINX_DIR ]]; then
-    printf "Done\n" ; else
-    exit 1
-fi
+mv "$TRAVIS_BUILD_DIR/config/travis/nginx" $NGINX_DIR
 
 replace_vars "$NGINX_DIR/nginx.conf"
 replace_vars "$NGINX_DIR/conf.d/condom-shop.test.conf"
