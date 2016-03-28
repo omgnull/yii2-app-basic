@@ -38,18 +38,12 @@ install:
   - composer config --global github-oauth.github.com 8e715ae4bc8a6fe4737f726897dbdef0868e2b90
   - travis_retry composer install --prefer-dist --no-interaction
   - composer show --self && composer global show -i && composer show -i
+  - sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" config/web.php
+  - cd tests && codecept build
 
 before_script:
-# setup application:
-  - |
-    sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" config/web.php
-    cd tests
-    codecept build
-    cd ..
+  - ps axu && netstat -nltp
 
 script:
-  - |
-    cd web
-    php -S localhost:8080 > /dev/null 2>&1 &
-    cd ../tests
-    codecept run
+  - cd $TRAVIS_BUIL_DIR/tests
+  - codecept run
