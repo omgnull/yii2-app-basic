@@ -28,9 +28,9 @@ install:
   - export YII_ENV=test
   - export DISPLAY=:99
   # nginx + php-fpm
-  - config/web-server.sh
+  - config/travis/web-server.sh
   # selenuim
-  - config/selenuim.sh
+  - config/travis/selenuim.sh
   # composer
   - travis_retry composer self-update 1.0.0-beta1 && composer --version
   - travis_retry composer global require fxp/composer-asset-plugin:dev-master --no-plugins
