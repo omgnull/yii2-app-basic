@@ -12,23 +12,23 @@ function replace_vars {
 }
 
 # setup php-fpm
+printf "Starting php-pfm daemon\n"
 cp "$HOME/.phpenv/versions/$PHP_VERSION/etc/php-fpm.conf.default" "$HOME/.phpenv/versions/$PHP_VERSION/etc/php-fpm.conf"
 echo "short_open_tag = On" >> "$HOME/.phpenv/versions/$PHP_VERSION/etc/php.ini"
 # run php-fpm
 "$PHP_BIN"
 
 # setup nginx
-printf "$TRAVIS_BUILD_DIR/config/travis/nginx"
-ls -al "$TRAVIS_BUILD_DIR/config/travis/nginx"
-printf "$TRAVIS_BUILD_DIR/config/travis/nginx $NGINX_DIR"
-mv "$TRAVIS_BUILD_DIR/config/travis/nginx" $NGINX_DIR
-ls -al $NGINX_DIR
+printf "Move Nginx setup from $TRAVIS_BUILD_DIR/config/travis/nginx to $NGINX_DIR\n"
+if [ mv "$TRAVIS_BUILD_DIR/config/travis/nginx" $NGINX_DIR ]; then
+    printf "Done\n" ; else
+    exit 1
+fi
+
 replace_vars "$NGINX_DIR/nginx.conf"
 replace_vars "$NGINX_DIR/conf.d/condom-shop.test.conf"
 
-cat "$NGINX_DIR/nginx.conf"
-cat "$NGINX_DIR/conf.d/condom-shop.test.conf"
-
 # run nginx
+printf "Starting Nginx daemon\n"
 nginx -c "$NGINX_DIR/nginx.conf" -p $NGINX_DIR
 

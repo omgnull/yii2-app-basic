@@ -5,7 +5,7 @@ SELENIUM_DIR="$HOME/.selenium"
 SELENIUM_DOWNLOAD_URL="http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.0.jar"
 
 function download {
-    printf 'Downloading Selenium server $SELENIUM_DOWNLOAD_URL\n'
+    printf "Downloading Selenium server $SELENIUM_DOWNLOAD_URL\n"
     wget -O $1 $SELENIUM_DOWNLOAD_URL
 }
 
@@ -17,7 +17,7 @@ fi
 
 # run selenium
 printf 'Starting Selenium server\n'
-java -jar selenium-server-standalone-2.53.0.jar > /tmp/selenium.log 2> /tmp/selenium.error &
+java -jar $SELENIUM_DIR/selenium-server-standalone-2.53.0.jar > /tmp/selenium.log 2> /tmp/selenium.error &
 
 # wait for selenium
 printf 'Waiting Selenium server to load\n'
@@ -26,6 +26,7 @@ until $(curl --output /dev/null --silent --head --fail http://localhost:4444/wd/
     sleep 1
 done
 printf '\n'
+printf 'Selenium server started\n'
 
 timeout 10s sh -c\
   "while ! curl --silent http://localhost:4444/ > /dev/null; do
