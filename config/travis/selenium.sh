@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 SELENIUM="selenium-server-standalone-2.53.0.jar"
 SELENIUM_DIR="$HOME/.selenium"

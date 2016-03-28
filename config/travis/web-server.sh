@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 PHP_VERSION=$(phpenv version-name)
 PHP_BIN="$HOME/.phpenv/versions/$PHP_VERSION/sbin/php-fpm"
