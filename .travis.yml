@@ -1,18 +1,18 @@
+sudo: false
 language: php
-php:
-  - 5.4
 addons:
-  apt:
-    - nginx
-    - realpath
   hosts:
     - condom-shop.test
     - static.condom-shop.test
     - new-condom-shop.test
     - static.new-condom-shop.test
+  apt:
+    packages:
+      - nginx
+      - realpath
 
-# docker based build
-sudo: false
+php:
+  - 5.4
 
 # cache dirs
 cache:
