@@ -5,7 +5,7 @@ PHP_BIN="$HOME/.phpenv/versions/$PHP_VERSION/sbin/php-fpm"
 NGINX_DIR="$HOME/nginx"
 
 function replace_vars {
-    sed \
+    sed -i \
         -e "s|%NGINX_DIR%|$NGINX_DIR|g" \
         -e "s|%TRAVIS_BUILD_DIR%|$TRAVIS_BUILD_DIR|g" \
         $1
@@ -25,6 +25,9 @@ mv "$TRAVIS_BUILD_DIR/config/travis/nginx" $NGINX_DIR
 ls -al $NGINX_DIR
 replace_vars "$NGINX_DIR/nginx.conf"
 replace_vars "$NGINX_DIR/conf.d/condom-shop.test.conf"
+
+cat "$NGINX_DIR/nginx.conf"
+cat "$NGINX_DIR/conf.d/condom-shop.test.conf"
 
 # run nginx
 nginx -c "$NGINX_DIR/nginx.conf"
